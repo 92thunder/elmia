@@ -32,14 +32,8 @@ var array = [];
 bot.dialog('これは問題', [
     function (session, args, next) {
         var problemEntity = builder.EntityRecognizer.findEntity(args.intent.entities, 'Problem');
-        if(session.message.text != "まとめて") {
-            session.send('問題は \'%s\' です。', problemEntity.entity);
-            array.push(problemEntity.entity);
-        } else {
-            array.forEach(function(problem) {
-                session.send('問題は \'%s\' です。', problem);
-            });
-        }
+        session.send('問題は \'%s\' です。', problemEntity.entity);
+        array.push(problemEntity.entity);
         session.endDialog();
     }
 ]).triggerAction({
