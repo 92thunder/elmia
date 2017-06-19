@@ -27,10 +27,19 @@ var bot = new builder.UniversalBot(connector, function (session) {
 var recognizer = new builder.LuisRecognizer(process.env.LUIS_MODEL_URL);
 bot.recognizer(recognizer);
 
+var array = [];
+
 bot.dialog('これは問題', [
     function (session, args, next) {
         var problemEntity = builder.EntityRecognizer.findEntity(args.intent.entities, 'Problem');
-        session.send('問題は \'%s\' です。', problemEntity);
+        if(session.message.text != "まとめて") {
+            session.send('問題は \'%s\' です。', problemEntity.entity);
+            array.push(problemEntity.entity);
+        } else {
+            array.forEach(function(problem) {
+                session.send('問題は \'%s\' です。', problem);
+            });
+        }
         session.endDialog();
     }
 ]).triggerAction({
