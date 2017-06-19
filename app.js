@@ -46,6 +46,17 @@ bot.dialog('これは問題', [
     matches: 'これは問題'
 });
 
+bot.dialog('問題を見せて', [
+    function (session, args, next) {
+        array.forEach(function(problem) {
+            session.send('問題は \'%s\' です。', problem);
+        });
+        session.endDialog();
+    }
+]).triggerAction({
+    matches: '問題を見せて'
+});
+
 // Spell Check
 if (process.env.IS_SPELL_CORRECTION_ENABLED === 'true') {
     bot.use({
