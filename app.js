@@ -13,8 +13,10 @@ server.listen(process.env.port || process.env.PORT || 443, function () {
 });
 // Create connector and listen for messages
 var connector = new builder.ChatConnector({
-    appId: process.env.MICROSOFT_APP_ID,
-    appPassword: process.env.MICROSOFT_APP_PASSWORD
+    //appId: process.env.MICROSOFT_APP_ID,
+    //appPassword: process.env.MICROSOFT_APP_PASSWORD
+    appId: "1ac9d661-1fa3-44a0-b1c3-e8c0250f2927",
+    appPassword: "CvhF4Bsyj4OnXa9A8s4a1EA"
 });
 server.post('/api/messages', connector.listen());
 
@@ -24,7 +26,7 @@ var bot = new builder.UniversalBot(connector, function (session) {
 
 // You can provide your own model by specifing the 'LUIS_MODEL_URL' environment variable
 // This Url can be obtained by uploading or creating your model from the LUIS portal: https://www.luis.ai/
-var recognizer = new builder.LuisRecognizer(process.env.LUIS_MODEL_URL);
+var recognizer = new builder.LuisRecognizer("https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/b47f4aaf-a78d-4c27-90ab-2c50293787d1?subscription-key=c786d1062ee341d69fee02b5e72949fc&staging=true&verbose=true&timezoneOffset=0&q=");
 bot.recognizer(recognizer);
 
 var array = [];
