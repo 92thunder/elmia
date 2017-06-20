@@ -32,9 +32,9 @@ var array = [];
 bot.dialog('これは問題', [
     function (session, args, next) {
         var problemEntity = builder.EntityRecognizer.findEntity(args.intent.entities, 'Problem');
-        session.send('問題は \'%s\' です。', problemEntity.entity);
+        session.send('問題は \'%s\' です。', problemEntity);
         session.endDialog();
-        array.push(problemEntity.entity);
+        array.push(problemEntity);
     }
 ]).triggerAction({
     matches: 'これは問題'
