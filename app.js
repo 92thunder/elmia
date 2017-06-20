@@ -33,11 +33,22 @@ bot.dialog('これは問題', [
     function (session, args, next) {
         var problemEntity = builder.EntityRecognizer.findEntity(args.intent.entities, 'Problem');
         session.send('問題は \'%s\' です。', problemEntity.entity);
-        array.push(problemEntity.entity);
         session.endDialog();
+        array.push(problemEntity.entity);
     }
 ]).triggerAction({
     matches: 'これは問題'
+});
+
+bot.dialog('問題を見せて', [
+    function (session, args, next) {
+        array.forEach(function(problem) {
+            session.send('問題は \'%s\' です。', problem);
+        });
+        session.endDialog();
+    }
+]).triggerAction({
+    matches: '問題を見せて'
 });
 
 // Spell Check
