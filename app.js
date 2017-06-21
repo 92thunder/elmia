@@ -32,7 +32,11 @@ var array = [];
 bot.dialog('これは問題', [
     function (session, args, next) {
         var problemEntity = builder.EntityRecognizer.findEntity(args.intent.entities, 'Problem');
-        session.send('問題は \'%s\' です。', problemEntity);
+        if (problemEntity) {
+            session.send('問題は \'%s\' です。', problemEntity.entity);
+        } else {
+            session.send('問題があったのですか？　でも……すみません、何が問題なのか分からないデス……');
+        }
         session.endDialog();
         array.push(problemEntity);
     }
