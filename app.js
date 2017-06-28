@@ -34,7 +34,7 @@ bot.dialog('これは問題', [
         var problemEntity = builder.EntityRecognizer.findEntity(args.intent.entities, 'Problem');
         if (problemEntity) {
             session.send('問題は \'%s\' です。', problemEntity.entity);
-            array.push(problemEntity);
+            array.push(problemEntity.entity);
         } else {
             session.send('問題があったのですか？　でも……すみません、何が問題なのか分からないデス……');
         }
